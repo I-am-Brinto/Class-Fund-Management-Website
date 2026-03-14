@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class Fund Manager CSE (Sec A)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="header__inner">
+        <h1 class="title">Class Fund Manager CSE (Sec A)</h1>
+        <p class="subtitle">Track collections, expenses, and balance with ease.</p>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="dashboard" aria-label="Summary dashboard">
+        <div class="card card--glass" id="card-collected">
+          <div class="card__icon" aria-hidden="true">💰</div>
+          <div class="card__content">
+            <div class="card__label">Total Collected</div>
+            <div class="card__value" id="totalCollected">৳ 0</div>
+          </div>
+        </div>
+        <div class="card card--glass" id="card-expenses">
+          <div class="card__icon" aria-hidden="true">🧾</div>
+          <div class="card__content">
+            <div class="card__label">Total Expenses</div>
+            <div class="card__value" id="totalExpenses">৳ 0</div>
+          </div>
+        </div>
+        <div class="card card--glass" id="card-balance">
+          <div class="card__icon" aria-hidden="true">⚖️</div>
+          <div class="card__content">
+            <div class="card__label">Current Balance</div>
+            <div class="card__value" id="currentBalance">৳ 0</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" aria-label="Add transaction">
+        <div class="panel__header">
+          <h2>Add New Transaction</h2>
+          <p>Enter the details below, then click Add to record a new collection or expense.</p>
+        </div>
+
+        <form id="transactionForm" class="form" autocomplete="off">
+          <div class="form__grid">
+            <div class="form__field">
+              <label for="description">Description</label>
+              <input id="description" name="description" type="text" required />
+            </div>
+
+            <div class="form__field">
+              <label for="amount">Amount</label>
+              <input id="amount" name="amount" type="number" step="0.01" min="0" placeholder="0.00" required />
+            </div>
+
+            <div class="form__field">
+              <label for="type">Type</label>
+              <select id="type" name="type" required>
+                <option value="collection">Collection</option>
+                <option value="expense">Expense</option>
+              </select>
+            </div>
+
+            <div class="form__field form__field--button">
+              <button type="submit" class="btn btn--primary" id="addTransactionBtn">
+                <span class="btn__label">Add Transaction</span>
+                <span class="btn__pulse" aria-hidden="true"></span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel" aria-label="Transaction list">
+        <div class="panel__header">
+          <h2>Transaction History</h2>
+          <p>Click edit to update a transaction or delete to remove it.</p>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="table" aria-label="Transactions">
+            <thead class="table__head">
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Type</th>
+                <th class="table__actions">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="transactionTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <div class="modal" id="editModal" aria-hidden="true">
+      <div class="modal__overlay" data-close="true"></div>
+      <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="editModalTitle">
+        <header class="modal__header">
+          <h3 id="editModalTitle">Edit Transaction</h3>
+          <button class="icon-btn" type="button" data-close="true" aria-label="Close edit dialog">✕</button>
+        </header>
+
+        <form id="editForm" class="form" autocomplete="off">
+          <div class="form__grid">
+            <div class="form__field">
+              <label for="editDescription">Description</label>
+              <input id="editDescription" name="editDescription" type="text" required />
+            </div>
+
+            <div class="form__field">
+              <label for="editAmount">Amount</label>
+              <input id="editAmount" name="editAmount" type="number" step="0.01" min="0" required />
+            </div>
+
+            <div class="form__field">
+              <label for="editType">Type</label>
+              <select id="editType" name="editType" required>
+                <option value="collection">Collection</option>
+                <option value="expense">Expense</option>
+              </select>
+            </div>
+
+            <div class="form__field form__field--button">
+              <button type="submit" class="btn btn--secondary">
+                <span class="btn__label">Save Changes</span>
+                <span class="btn__pulse" aria-hidden="true"></span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>Built for class fund tracking • Password protected edit operations</p>
+    </footer>
+  </div>
+
+  <!-- Firebase (use your own config below) -->
+  <script type="module" src="script.js"></script>
+</body>
+</html>
